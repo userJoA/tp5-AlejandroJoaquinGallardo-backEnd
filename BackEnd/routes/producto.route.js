@@ -4,9 +4,9 @@
 const express = require('express'); 
 const router = express.Router();
 //definimos las rutas para la gestion de agente 
-router.get('/', productoCtrl.getProductos); 
+router.get('/', productoCtrl.getProductos);
 router.post('/', productoCtrl.createProducto); 
-router.get('/:id', productoCtrl.getPrducto); 
+router.get('/:id', productoCtrl.getProducto); 
 router.put('/:id', productoCtrl.editProducto); 
 router.delete('/:id', productoCtrl.deleteProducto);
 //exportamos el modulo de rutas
