@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/',ticketCtrl.getTickets);
 router.post('/',ticketCtrl.createTicket);
-router.delete('/',ticketCtrl.deleteTicket);
-router.put('/',ticketCtrl.editTicket);
+router.delete('/:id',ticketCtrl.deleteTicket);
+router.put('/:id',ticketCtrl.editTicket);
 
 module.exports = router;

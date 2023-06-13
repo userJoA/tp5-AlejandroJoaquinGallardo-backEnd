@@ -43,7 +43,7 @@ ticketCtrl.createTicket= async (req, res) => {
 
   
 ticketCtrl.editTicket = async (req, res) => {
-    const vticket = new Ticktet(req.body);
+    const vticket = new Ticket(req.body);
     try {
       await Ticket.updateOne({ _id: req.body._id }, vticket);
       res.json({

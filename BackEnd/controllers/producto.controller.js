@@ -11,7 +11,6 @@ productoCtrl.getProductos = async (req, res) => {
 };
 
 
-
 productoCtrl.createProducto = async (req, res) => {
   var producto = new Producto(req.body);
   try {
