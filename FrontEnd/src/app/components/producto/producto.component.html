@@ -22,19 +22,31 @@
     </button>
   </div>
 </div> -->
+<div class="text-center">
+  <h3>LISTA DE PRODUCTOS</h3>
+</div>
 
-
-<div class="container-lg">
+<div class="card">
+  <div class="m-2">
+    <button type="button" class="btn btn-primary" (click)="agregarProducto()">AGREGAR PRODUCTO</button>
+  </div>
   <div class="row">
-      <div class="col-lg-4 col-md-4 col-12" *ngFor="let p of productos" >
-        <div class="card">
-          <img src="https://w7.pngwing.com/pngs/482/190/png-transparent-tennis-ball-small-ball-s-rectangle-sport-logo-thumbnail.png" class="card-img-top" alt="...">
+      <div class="col-lg-3 col-md-4 col-sm-12 mx-auto p-2" *ngFor="let p of productos" >
+        <div class="card" style="width: 400px;">
+          <img 
+            src="https://w7.pngwing.com/pngs/482/190/png-transparent-tennis-ball-small-ball-s-rectangle-sport-logo-thumbnail.png" 
+            class="card-img-top m-2" alt="..." style="height: 180px; width: 362px;">
             <div class="card-body">
-            <h5 class="card-title">{{p.nombre}}</h5>
-            <p class="card-text">{{p.descripcion}}</p>
+            <h5 class="card-title">{{p.nombre}} <br></h5>
+            <p class="card-text">
+              {{p.descripcion}}<br>
+              ${{p.precio}}  <br>
+            </p>
             <a href="#" class="btn btn-primary">Go somewhere</a>
           </div>
         </div>
       </div>
   </div>
 </div>
+
+

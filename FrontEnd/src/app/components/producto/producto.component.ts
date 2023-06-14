@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Producto } from 'src/app/models/producto';
 import { ProductoService } from 'src/app/services/producto.service';
 
@@ -8,7 +9,8 @@ import { ProductoService } from 'src/app/services/producto.service';
   styleUrls: ['./producto.component.css']
 })
 export class ProductoComponent implements OnInit {
-  constructor(private productoService:ProductoService){
+  constructor(private productoService:ProductoService,
+              private router:Router){
     this.cargarProductos();
     this.productos= new Array<Producto>();
   }
@@ -32,4 +34,7 @@ export class ProductoComponent implements OnInit {
     )
   }
 
+  public agregarProducto(){
+    this.router.navigate(["formProducto",0])   
+  }
 }

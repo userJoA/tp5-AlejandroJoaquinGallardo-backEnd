@@ -9,6 +9,7 @@ import { HeaderComponent } from './components/layout/header/header.component';
 import { HomeComponent } from './components/layout/home/home.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
 import { FormProductoComponent } from './components/form-producto/form-producto.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FormProductoComponent } from './components/form-producto/form-producto.
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

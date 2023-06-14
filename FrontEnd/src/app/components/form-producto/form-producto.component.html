@@ -1,1 +1,44 @@
-<p>form-producto works!</p>
+<div class="card">
+    <div class="card-header">
+      GESTION DE PRODUCTOS
+    </div>
+    <div class="card-body">
+        <form>
+            <div class="mb-3">
+                <label for="idnombre" class="form-label">Nombre</label>
+                <input name="nombre" type="text" class="form-control" id="idnombre"
+                 [(ngModel)]="producto.nombre"
+                >
+              </div>
+              <div class="mb-3">
+                <label for="idfuncion" class="form-label">Descripcion</label>
+                <textarea name="funcion" class="form-control" id="idDescripcion" rows="3"
+                [(ngModel)]="producto.descripcion"
+                    ></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="idemail" class="form-label">URL IMAGEN</label>
+                <input name="text" type="text" class="form-control" id="idemail"
+                [(ngModel)]="producto.imagen"   >
+              </div>
+
+              <div class="mb-3">
+                <label for="idPrecio" class="form-label">Precio</label>
+                <input name="number" type="number" class="form-control" id="idPrecio"
+                [(ngModel)]="producto.precio"   >
+              </div>
+
+
+              <div class="mb-3">
+                <label for="iddestacado" class="form-label">Destacado</label>
+                <select class="form-select" name="destacado" [(ngModel)]="producto.destacado"  >
+                    <option value="true">Destacado</option>
+                    <option value="false" selected>No Destacado</option>
+                </select>
+              </div>
+
+              <button type="button" class="btn btn-primary"(click)="guardarProducto()">Guardar</button>
+        </form>
+    </div>
+</div>
+
