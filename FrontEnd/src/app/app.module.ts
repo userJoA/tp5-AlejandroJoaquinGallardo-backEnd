@@ -10,6 +10,9 @@ import { HomeComponent } from './components/layout/home/home.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
 import { FormProductoComponent } from './components/form-producto/form-producto.component';
 import { FormsModule } from '@angular/forms';
+import { TransaccionComponent } from './components/transaccion/transaccion.component';
+import { TransaccionFormComponent } from './components/transaccion-form/transaccion-form.component';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     HomeComponent,
     FooterComponent,
-    FormProductoComponent
+    FormProductoComponent,
+    TransaccionComponent,
+    TransaccionFormComponent
+
   ],
   imports: [
     BrowserModule,
