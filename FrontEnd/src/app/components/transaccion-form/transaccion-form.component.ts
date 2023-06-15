@@ -15,17 +15,24 @@ export class TransaccionFormComponent implements OnInit{
     this.transaccion= new Transaccion();
   }
   accion!:string;
-   
+  band1:boolean = false;
   ngOnInit(): void {
     this.activatedRouter.params.subscribe(params=>{
       if(params['id']=="0"){
         this.accion = "new";
 
       }else{
-      
+
       }
     }
   )
+  }
+
+  Convertir(){
+    if(this.transaccion!=null && this.transaccion.cantidadOrigen!=null && this.transaccion.tasaConversion!=null){
+      this.transaccion.cantidadDestino=this.transaccion.cantidadOrigen*this.transaccion.tasaConversion;
+      this.band1=true;
+    }
   }
 
   guardarTransaccion(){

@@ -10,12 +10,14 @@ import { TransaccionService } from 'src/app/services/transaccion.service';
 })
 export class TransaccionComponent implements OnInit {
   ngOnInit(): void {
-    
+
   }
 
   constructor(private transaccionService: TransaccionService,
               private router: Router){
+    this.cargarTransacciones();
     this.transacciones= new Array<Transaccion>();
+
   }
   transaccion!:Transaccion;
   transacciones!:Array<Transaccion>;
@@ -34,7 +36,7 @@ export class TransaccionComponent implements OnInit {
   }
 
   public agregarTransaccion(){
-    this.router.navigate(["",0])   
+    this.router.navigate(["",0])
   }
 
 }

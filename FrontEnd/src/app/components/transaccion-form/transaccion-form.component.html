@@ -1,1 +1,50 @@
-<p>transaccion-form works!</p>
+<div class="card">
+  <form class="w-75 mb-5 mt-5 mx-auto" id="page-b-form">
+    <legend class="text-center bg-white text-danger w-100 p-4 border border-danger">Conversor de Divisas</legend>
+    <div class="mb-3 p-2">
+      <label for="textInput" class="form-label">Cantidad</label>
+      <input type="number" class="form-control" id="textInput" aria-describedby="number" name="cantidad" placeholder="$" [(ngModel)]="transaccion.cantidadOrigen">
+    </div>
+    <div class="mb-3 p-2">
+      <label for="exampleInput" class="form-label">De</label>
+      <select class="form-select form-select-lg " name="moneda" aria-label=".form-select-lg example" [(ngModel)]="transaccion.monedaOrigen">
+        <option selected>Seleccione Moneda</option>
+        <option value="ARS">ARS</option>
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
+      </select>
+    </div>
+    <div class="mb-3 p-2">
+      <label for="exampleInput" class="form-label">A</label>
+      <select class="form-select form-select-lg " name="monedaAconvertir" aria-label=".form-select-lg example" [(ngModel)]="transaccion.monedaDestino">
+        <option selected>Seleccione Moneda</option>
+        <option value="ARS">ARS</option>
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
+      </select>
+    </div>
+    <div class="mb-3 p-2">
+      <label for="textInput" class="form-label">Tasa de Conversion </label>
+      <input type="number" class="form-control" id="textInput" aria-describedby="number" name="tasaconversion" placeholder="$" [(ngModel)]="transaccion.tasaConversion">
+    </div>
+
+    <div class="mb-3 p-2">
+      <label for="textInput" class="form-label">Email</label>
+      <input type="email" class="form-control" id="textInput" aria-describedby="number" name="email"  [(ngModel)]="transaccion.emailCliente">
+    </div>
+
+    <div [hidden]="!band1" class="mb-3 p-2" >
+      <label for="textInput" class="form-label">Monto convertido</label>
+      <input type="number" class="form-control" id="textInput" aria-describedby="number" name="montoConvertido" placeholder="$" [(ngModel)]="transaccion.cantidadDestino">
+    </div>
+
+    <div [hidden]="band1" class="mb-3 p-2 text-white" style=" margin: 10px 0 10px 0; text-align: center;">
+        <button class="btn btn-warning p-2" style="width: 100%;" (click)="Convertir()" >Convertir</button>
+    </div>
+    <div [hidden]="!band1" class="mb-3 p-2 text-white" style=" margin: 10px 0 10px 0; text-align: center;">
+      <button type="submit" class="btn btn-susscess" (click)="guardarTransaccion()">Guardar Transaccion</button>
+  </div>
+  </form>
+</div>
