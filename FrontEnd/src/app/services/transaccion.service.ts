@@ -20,7 +20,29 @@ export class TransaccionService {
         }
       ),params: new HttpParams()
     }
+    return this._http.get(this.Url+"transaccion",httpOptions);
+  }
 
+  getTransaccionesEmail(email:string):Observable<any>{
+    let httpOptions={
+      headers:new HttpHeaders(
+        {
+
+        }
+      ),params: new HttpParams().append('emailCliente',email)
+    }
+    return this._http.get(this.Url+"transaccion",httpOptions);
+  }
+
+
+  getTransaccionesMonedas(monedaOrigen:string,monedaDestino:string):Observable<any>{
+    let httpOptions={
+      headers:new HttpHeaders(
+        {
+
+        }
+      ),params: new HttpParams().append('monedaOrigen',monedaOrigen).append('monedaDestino',monedaDestino)
+    }
     return this._http.get(this.Url+"transaccion",httpOptions);
   }
 

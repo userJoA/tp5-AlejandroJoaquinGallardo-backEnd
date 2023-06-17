@@ -15,12 +15,15 @@ export class TransaccionComponent implements OnInit {
 
   constructor(private transaccionService: TransaccionService,
               private router: Router){
-    this.cargarTransacciones();
+
     this.transacciones= new Array<Transaccion>();
 
   }
+
+  aux:string="";
   transaccion!:Transaccion;
   transacciones!:Array<Transaccion>;
+  bandTransacciones:boolean = false;
 
   public cargarTransacciones(){
     this.transaccionService.getTransacciones().subscribe(
@@ -33,6 +36,24 @@ export class TransaccionComponent implements OnInit {
         });
       }
     )
+    this.bandTransacciones=true;
+  }
+
+  email:string="1000";
+  bandTransaccionesEmail:boolean=false;
+
+  public cargarTransacionesPorEmail(){
+    this.transaccionService.getTransaccionesEmail(this.email).subscribe(
+      result=>{
+        let tran= new Transaccion();
+        result.forEach((element:any) => {
+          Object.assign(tran, element);
+          this.transacciones.push(tran);
+          tran = new Transaccion();
+        });
+      }
+    )
+      this.bandTransaccionesEmail=true;
   }
 
   public agregarTransaccion(){
