@@ -11,14 +11,13 @@
 
 <div class="card">
   <div >
-      <div class="border border-black">
-        <button class="btn btn-lg w-60 text-start btn-success" (click)="cargarTransacciones()">Listar Todas las transacciones</button>
+      <div>
+        <button class="btn btn-lg w-60 text-start" (click)="cargarTransacciones()">Listar Todas las transacciones</button>
       </div>
-      <div class="border border-black">
-        <H6>Filtrar Por Email</H6>
-        <form class="row g-3 m-3 border border-black" >
-          <div class="col-auto ">
-            <label for="email" class="visually-hidden">Email</label>
+      <div>
+        <button class="btn btn-lg w-60 text-start" (click)="cambiar()">Listar transacciones por email</button>
+        <form class="row g-3 m-3 bg-ligth" *ngIf="aux" >
+          <div class="col-auto" >
             <input type="email" class="form-control" id="email" placeholder="email">
           </div>
           <div class="col-auto">
@@ -27,7 +26,22 @@
         </form>
       </div>
       <div>
-        <button class="btn btn-lg w-60 text-start btn-success"> boton 2</button>
+        <button class="btn btn-lg w-60 text-start" (click)="cambiar2()">Listar Transacciones por Moneda de origen y Destino</button>
+        <form class="row g-3 m-3 bg-ligth" *ngIf="aux2" >
+          <div class="col-auto" >
+            <input type="email" class="form-control" id="email" placeholder="email">
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">Filtrar</button>
+          </div>
+          <div class="col-auto" >
+            <input type="email" class="form-control" id="email" placeholder="email">
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">Filtrar</button>
+          </div>
+        </form>
+        
       </div>
   </div>
 </div>

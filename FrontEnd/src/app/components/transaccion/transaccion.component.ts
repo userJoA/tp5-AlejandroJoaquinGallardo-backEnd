@@ -20,10 +20,24 @@ export class TransaccionComponent implements OnInit {
 
   }
 
-  aux:string="";
+  aux:boolean=false;
+  aux2:boolean=false;
   transaccion!:Transaccion;
   transacciones!:Array<Transaccion>;
   bandTransacciones:boolean = false;
+
+  cambiar(){
+    if(this.aux==false){
+     this.aux=true;
+    }else
+    this.aux=false;
+  }
+  cambiar2(){
+    if(this.aux2==false){
+      this.aux2=true;
+     }else
+     this.aux2=false;
+  }
 
   public cargarTransacciones(){
     this.transaccionService.getTransacciones().subscribe(
