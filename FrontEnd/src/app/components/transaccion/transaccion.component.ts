@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Transaccion } from 'src/app/models/transaccion';
 import { TransaccionService } from 'src/app/services/transaccion.service';
 
@@ -14,7 +14,8 @@ export class TransaccionComponent implements OnInit {
   }
 
   constructor(private transaccionService: TransaccionService,
-              private router: Router){
+              private router: Router,
+              private activatedRoute: ActivatedRoute){
 
     this.transacciones= new Array<Transaccion>();
 
@@ -40,6 +41,7 @@ export class TransaccionComponent implements OnInit {
   }
 
   public cargarTransacciones(){
+    this.transacciones= new Array<Transaccion>();
     this.transaccionService.getTransacciones().subscribe(
       result=>{
         let tran= new Transaccion();
@@ -53,10 +55,9 @@ export class TransaccionComponent implements OnInit {
     this.bandTransacciones=true;
   }
 
-  email:string="1000";
-  bandTransaccionesEmail:boolean=false;
-
+  email:string="";
   public cargarTransacionesPorEmail(){
+    this.transacciones= new Array<Transaccion>();
     this.transaccionService.getTransaccionesEmail(this.email).subscribe(
       result=>{
         let tran= new Transaccion();
@@ -67,11 +68,40 @@ export class TransaccionComponent implements OnInit {
         });
       }
     )
-      this.bandTransaccionesEmail=true;
+    this.bandTransacciones=true;
   }
 
+  monedaOrigen:string="";
+  monedaDestino:string="";
+  public cargarTransacionesMonOD(){
+    this.transacciones= new Array<Transaccion>();
+    this.transaccionService.getTransaccionesMonedas(this.monedaOrigen,this.monedaDestino).subscribe(
+      result=>{
+        let tran= new Transaccion();
+        result.forEach((element:any) => {
+          Object.assign(tran, element);
+          this.transacciones.push(tran);
+          tran = new Transaccion();
+        });
+      }
+    )
+    this.bandTransacciones=true;
+  }
+  eliminarTransaccion (id:string){
+    this.transaccionService.deleteTransaccion(id).subscribe(
+      result=>{
+        console.log("Transaccion eliminada");
+        this.transacciones= new Array<Transaccion>();
+        this.cargarTransacciones();
+      },error=>{
+        console.log("Error al eliminar Transaccion");
+      }
+
+    );
+  } 
+
   public agregarTransaccion(){
-    this.router.navigate(["",0])
+    this.router.navigate(["transaccionForm",0])
   }
 
 }

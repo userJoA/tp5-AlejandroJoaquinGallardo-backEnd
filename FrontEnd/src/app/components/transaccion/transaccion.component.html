@@ -18,10 +18,10 @@
         <button class="btn btn-lg w-60 text-start" (click)="cambiar()">Listar transacciones por email</button>
         <form class="row g-3 m-3 bg-ligth" *ngIf="aux" >
           <div class="col-auto" >
-            <input type="email" class="form-control" id="email" placeholder="email">
+            <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese email" [(ngModel)]="email">
           </div>
           <div class="col-auto">
-            <button type="submit" class="btn btn-primary mb-3">Filtrar</button>
+            <button type="submit" class="btn btn-primary mb-3" (click)="cargarTransacionesPorEmail()">Filtrar</button>
           </div>
         </form>
       </div>
@@ -29,30 +29,19 @@
         <button class="btn btn-lg w-60 text-start" (click)="cambiar2()">Listar Transacciones por Moneda de origen y Destino</button>
         <form class="row g-3 m-3 bg-ligth" *ngIf="aux2" >
           <div class="col-auto" >
-            <input type="email" class="form-control" id="email" placeholder="email">
-          </div>
-          <div class="col-auto">
-            <button type="submit" class="btn btn-primary mb-3">Filtrar</button>
+            <input type="text" class="form-control" id="monedaOrigen" placeholder="Moneda De Origen" name="monedaOrigen" [(ngModel)]="monedaOrigen">
           </div>
           <div class="col-auto" >
-            <input type="email" class="form-control" id="email" placeholder="email">
+            <input type="text" class="form-control" id="monedaDestino" placeholder="Moneda Destino" name="monedaDestino" [(ngModel)]="monedaDestino">
           </div>
           <div class="col-auto">
-            <button type="submit" class="btn btn-primary mb-3">Filtrar</button>
+            <button type="submit" class="btn btn-primary mb-3" (click)="cargarTransacionesMonOD()">Filtrar</button>
           </div>
         </form>
         
       </div>
   </div>
 </div>
-
-
-<select class="form-select" aria-label="Default select example" [(ngModel)]="aux">
-  <option selected>Open this select menu</option>
-  <option value="1" (ngModelChange)="cargarTransacciones()">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option>
-</select>
 
 
 <div class="card" *ngIf="bandTransacciones">
@@ -76,8 +65,8 @@
           <td>{{t.emailCliente}}</td>
           <td>{{t.tasaConversion}}</td>
           <td>
-            <button class="btn btn-success">MOD</button>
-            <button class="btn btn-danger">BORRAR</button>
+            <button class="btn btn-success" >MOD</button>
+            <button class="btn btn-danger" (click)="eliminarTransaccion(t._id)">BORRAR</button>
           </td>
         </tr>
       </tbody>

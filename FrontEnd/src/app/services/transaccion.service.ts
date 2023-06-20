@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Ticket } from '../models/ticket';
+import { Transaccion } from '../models/transaccion';
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +47,7 @@ export class TransaccionService {
     return this._http.get(this.Url+"transaccion",httpOptions);
   }
 
-  crearTransaccion(ticket:Ticket) : Observable<any>{
+  crearTransaccion(transaccion:Transaccion) : Observable<any>{
     let httpOptions = {
        headers : new HttpHeaders(
         {
@@ -55,7 +56,20 @@ export class TransaccionService {
       ),
       params:new HttpParams()
     }
-    let body= JSON.stringify(ticket);
+    let body= JSON.stringify(transaccion);
     return this._http.post(this.Url+"transaccion/",body, httpOptions);
+  }
+
+  deleteTransaccion(id:string) : Observable<any>{
+    let httpOptions = {
+       headers : new HttpHeaders(
+        {
+          "Content-Type": "application/json"
+        }
+      ),
+      params:new HttpParams()
+    }
+    
+    return this._http.delete(this.Url+"transaccion/"+id, httpOptions);
   }
 }

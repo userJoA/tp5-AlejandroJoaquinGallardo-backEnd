@@ -22,6 +22,7 @@ export class TransaccionFormComponent implements OnInit{
         this.accion = "new";
 
       }else{
+        this.accion = "update";
 
       }
     }
@@ -41,6 +42,8 @@ export class TransaccionFormComponent implements OnInit{
         if(response.status==1)
           {
             alert(response.msg);
+            this.transaccion= new Transaccion();
+            this.band1=false;
           }
       },error=>{
         alert(error.msg);
@@ -48,6 +51,6 @@ export class TransaccionFormComponent implements OnInit{
     )
   }
 
-
+  
 
 }

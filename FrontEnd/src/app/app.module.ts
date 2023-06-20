@@ -12,6 +12,10 @@ import { FormProductoComponent } from './components/form-producto/form-producto.
 import { FormsModule } from '@angular/forms';
 import { TransaccionComponent } from './components/transaccion/transaccion.component';
 import { TransaccionFormComponent } from './components/transaccion-form/transaccion-form.component';
+import { EspectadorComponent } from './components/espectador/espectador.component';
+import { EspectadorFormComponent } from './components/espectador-form/espectador-form.component';
+import { TicketComponent } from './components/ticket/ticket.component';
+import { TicketFormComponent } from './components/ticket-form/ticket-form.component';
 
 
 @NgModule({
@@ -23,7 +27,11 @@ import { TransaccionFormComponent } from './components/transaccion-form/transacc
     FooterComponent,
     FormProductoComponent,
     TransaccionComponent,
-    TransaccionFormComponent
+    TransaccionFormComponent,
+    EspectadorComponent,
+    EspectadorFormComponent,
+    TicketComponent,
+    TicketFormComponent
 
   ],
   imports: [

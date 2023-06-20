@@ -20,7 +20,7 @@ ticketCtrl.createTicket= async (req, res) => {
 
   ticketCtrl.getTickets= async (req, res) => {
     let criteria={};
-    //filtro para Producto destacado
+   
     if((req.query.categoriaEspectador!=null && req.query.categoriaEspectador!="")){
       criteria.categoriaEspectador= req.query.categoriaEspectador;
     }
