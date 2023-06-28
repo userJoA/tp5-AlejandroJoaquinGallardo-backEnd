@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Ticket } from '../models/ticket';
 
 @Injectable({
   providedIn: 'root'
@@ -44,5 +45,18 @@ export class TicketService {
     return this._http.delete(this.Url+"ticket",httpOptions);
   }
   
+
+  createTicket(ticket:Ticket) : Observable<any>{
+    let httpOptions = {
+       headers : new HttpHeaders(
+        {
+          "Content-Type": "application/json"
+        }
+      ),
+      params:new HttpParams()
+    }
+    let body= JSON.stringify(ticket);
+    return this._http.post(this.Url+"ticket/",body, httpOptions);
+  }
 }
 

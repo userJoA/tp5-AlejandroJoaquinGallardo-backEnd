@@ -13,13 +13,15 @@ export class ProductoComponent implements OnInit {
               private router:Router){
     this.cargarProductos();
     this.productos= new Array<Producto>();
+    this.carroProductos= new Array<Producto>();
   }
   ngOnInit(): void {
 
   }
   producto!: Producto;
   productos!:Array<Producto>;
-
+  carroProductos!:Array<Producto>;
+  precioTotal: number = 0;
 
   public cargarProductos(){
     this.productoService.getproductos().subscribe(
@@ -32,6 +34,12 @@ export class ProductoComponent implements OnInit {
         });
       }
     )
+  }
+
+  agregarProductoCarro(p:Producto){
+    this.carroProductos.push(p);
+    this.precioTotal= this.precioTotal+p.precio;
+
   }
 
   public agregarProducto(){
