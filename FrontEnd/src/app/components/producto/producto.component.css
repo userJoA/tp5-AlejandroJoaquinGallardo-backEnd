@@ -5,7 +5,13 @@
     box-shadow: 0 0 20px #196F3D ;
 }
 
-.botonesCarrusel:hover {
+.carousel-btn:hover {
     background-color: rgb(0, 0, 0, 0.2);
     color: black;
+}
+
+
+.card{
+  width: 500px;
+  margin-left: 350px;
 }

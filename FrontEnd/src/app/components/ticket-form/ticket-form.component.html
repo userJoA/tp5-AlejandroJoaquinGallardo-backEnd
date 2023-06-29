@@ -1,33 +1,109 @@
 <div class="container">
-    <div >
-        <legend class="text-center">ALTA TICKET</legend>
-        <form class="m-5 p-4 border border-primary " style="border-radius: 12px; box-shadow: 0 0 15px #ddd;
-        background: #fff;" >
-            <div class="mb-3">
-              <label for="" class="form-label">Fecha de compra</label>
-              <input type="text" class="form-control" id="fechaCompra" aria-describedby="fecha" name="fechaCompra" [(ngModel)]="ticket.fechaCompra">
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Precio de Ticket</label>
-              <input type="number" class="form-control" id="precio" name="precioTicket" [(ngModel)]="ticket.precioTicket">
-            </div>
-            <div class="mb-3 p-2">
-                <label for="categoria" class="col-sm-3 col-form-label">Tipo Espectador</label>
-                <select class="form-select form-select-lg" name="categoria" id="categoria" aria-label=".form-select-lg example" [(ngModel)]="ticket.categoriaEspectador">
-               
-                  <option value="l">Local</option>
-                  <option value="e">Extranjero</option>
-                </select>
-              </div>
-
-              <div class="mb-3 p-2">
-                <label for="espectador" class="col-sm-3 col-form-label">Espectador</label>
-                <select class="form-select form-select-lg" name="espectador" id="espectador" aria-label=".form-select-lg example" [(ngModel)]="ticket.espectador">
-                    <option *ngFor="let e of espectadores" [ngValue]="e">{{e.nombre}} {{e.apellido}} - DNI: {{e.dni}}</option>
-                </select>
-              </div>
-
-            <button class="btn btn-primary" (click)="guardarTicket()">Submit</button>
-          </form>
+  <div>
+    <legend class="text-center">ALTA TICKET</legend>
+    <form
+      class="m-5 p-4 border border-primary"
+      style="border-radius: 12px; box-shadow: 0 0 15px #ddd; background: #fff"
+    >
+      <div class="mb-3">
+        <label for="" class="form-label">Fecha de compra</label>
+        <input
+          type="text"
+          class="form-control"
+          id="fechaCompra"
+          aria-describedby="fecha"
+          name="fechaCompra"
+          [(ngModel)]="ticket.fechaCompra"
+          #fechaCobro="ngModel" required
+        />
+        <div *ngIf="fechaCobro.invalid && (fechaCobro.dirty || fechaCobro.touched)" class="alert alert-danger">
+          <div *ngIf="fechaCobro.errors?.['required']">
+            Fecha de cobro es requerida.
+          </div>
     </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Precio de Ticket</label>
+        <input
+          type="number"
+          class="form-control"
+          id="precio"
+          name="precioTicket"
+          [(ngModel)]="ticket.precioTicket"
+          #precio="ngModel" required
+        />
+        <div
+        *ngIf="precio.invalid && (precio.dirty || precio.touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="precio.errors?.['required']">Ingrese un valor.</div>
+        <div *ngIf="precio.errors?.['min']">La cantidad minima es 1.</div>
+      </div>
+      </div>
+      <div class="mb-3 p-2">
+        <label for="categoria" class="col-sm-3 col-form-label"
+          >Tipo Espectador</label
+        >
+        <select
+          class="form-select form-select-lg"
+          name="categoria"
+          id="categoria"
+          aria-label=".form-select-lg example"
+          [(ngModel)]="ticket.categoriaEspectador"
+          #tipoEspectador="ngModel"
+          required
+        >
+          <option value="l">Local</option>
+          <option value="e">Extranjero</option>
+        </select>
+        <div *ngIf="tipoEspectador.invalid && (tipoEspectador.dirty || tipoEspectador.touched)" class="alert alert-danger">
+          <div *ngIf="tipoEspectador.errors?.['required']">
+          Tipo espectador es requerido.
+          </div>
+      </div>
+      </div>
+
+      <div class="mb-3 p-2">
+        <label for="espectador" class="col-sm-3 col-form-label"
+          >Espectador</label
+        >
+        <select
+          class="form-select form-select-lg"
+          name="espectador"
+          id="espectador"
+          aria-label=".form-select-lg example"
+          [(ngModel)]="ticket.espectador"
+          #espec="ngModel" required
+        >
+          <option *ngFor="let e of espectadores" [ngValue]="e">
+            {{ e.nombre }} {{ e.apellido }} - DNI: {{ e.dni }}
+          </option>
+        </select>
+        <div *ngIf="espec.invalid && (espec.dirty || espec.touched)" class="alert alert-danger">
+          <div *ngIf="espec.errors?.['required']">
+              Este campo es obligatorio.
+          </div>
+      </div>
+      </div>
+
+      <button
+        class="btn btn-primary"
+        *ngIf="ticket._id == null"
+        (click)="guardarTicket()"
+      >
+        Guardar
+      </button>
+      <button
+        *ngIf="ticket._id != null"
+        type="submit"
+        class="btn btn-success"
+        (click)="modificarTicket(ticket)"
+      >
+        Modificar ticket
+      </button>
+      <button type="submit" class="btn btn-secondary mx-1" (click)="irAlista()">
+        Volver
+      </button>
+    </form>
+  </div>
 </div>

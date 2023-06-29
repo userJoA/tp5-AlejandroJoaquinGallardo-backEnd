@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Producto } from 'src/app/models/producto';
 import { ProductoService } from 'src/app/services/producto.service';
 
@@ -11,10 +11,11 @@ import { ProductoService } from 'src/app/services/producto.service';
 export class FormProductoComponent implements  OnInit {
   producto!: Producto;
   constructor(private route: ActivatedRoute,
-              private productoService: ProductoService){
-    this.producto = new Producto();       
+              private productoService: ProductoService,
+              private rout: Router){
+    this.producto = new Producto();
   }
-  
+
   accion:string = '';
 
   ngOnInit(): void {
@@ -24,7 +25,7 @@ export class FormProductoComponent implements  OnInit {
         }
       }
     )
-    
+
   }
 
   guardarProducto(){
@@ -39,4 +40,7 @@ export class FormProductoComponent implements  OnInit {
     this.producto= new Producto();
   }
 
+  volver(){
+    this.rout.navigate(['producto']);
+  }
 }

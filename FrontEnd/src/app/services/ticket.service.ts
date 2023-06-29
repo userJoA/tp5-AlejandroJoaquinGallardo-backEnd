@@ -23,6 +23,17 @@ export class TicketService {
     return this._http.get(this.Url+"ticket",httpOptions);
   }
 
+  getTicket(id:string): Observable<any>{
+    let httpOptions={
+      headers:new HttpHeaders(
+        {
+
+        }
+      ),params: new HttpParams()
+    }
+    return this._http.get(this.Url+"ticket/"+id,httpOptions);
+  }
+
   getTicketsPorCategoria(categoria:string): Observable<any>{
     let httpOptions={
       headers:new HttpHeaders(
@@ -40,11 +51,11 @@ export class TicketService {
         {
 
         }
-      ),params: new HttpParams().append("id",id)
+      ),params: new HttpParams()
     }
-    return this._http.delete(this.Url+"ticket",httpOptions);
+    return this._http.delete(this.Url+"ticket/"+id,httpOptions);
   }
-  
+
 
   createTicket(ticket:Ticket) : Observable<any>{
     let httpOptions = {
@@ -58,5 +69,19 @@ export class TicketService {
     let body= JSON.stringify(ticket);
     return this._http.post(this.Url+"ticket/",body, httpOptions);
   }
+
+  modificarTicket(ticket:Ticket) : Observable<any>{
+    let httpOptions = {
+       headers : new HttpHeaders(
+        {
+          "Content-Type": "application/json"
+        }
+      ),
+      params:new HttpParams()
+    }
+    let body= JSON.stringify(ticket);
+    return this._http.put(this.Url+"ticket/"+ticket._id,body,httpOptions);
+  }
+
 }
 

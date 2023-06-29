@@ -4,6 +4,7 @@ const express = require("express");
 const router = express.Router();
 
 router.get('/',ticketCtrl.getTickets);
+router.get('/:id',ticketCtrl.getTicket);
 router.post('/',ticketCtrl.createTicket);
 router.delete('/:id',ticketCtrl.deleteTicket);
 router.put('/:id',ticketCtrl.editTicket);

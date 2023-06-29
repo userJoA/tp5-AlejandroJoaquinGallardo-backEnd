@@ -1,174 +1,177 @@
-<!-- <div class="container-lg">
-  <div id="carouselExample" class="carousel slide">
-    <div class="carousel-inner row" >
-      <div class="col-lg-3 col-md-3 col-12 carousel-item active" *ngFor="let p of productos">
-        <div class="card">
-          <img src="https://w7.pngwing.com/pngs/482/190/png-transparent-tennis-ball-small-ball-s-rectangle-sport-logo-thumbnail.png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">{{p.nombre}}</h5>
-            <p class="card-text">{{p.descripcion}}</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <button class="carousel-control-prev bg-danger-subtle" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next bg-danger-subtle" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-</div> -->
-
 <div class="container">
- <div class="text-center mt-2">
-  <div>
-    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <div class="text-center mt-2">
+    <div>
+      <button
+        type="button"
+        class="btn"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
         <i class="bi bi-cart">ver Carro</i>
-    </button>
+      </button>
     </div>
 
-  <div class="mt-3 mb-2">
-    <button type="button" class="btn btn-dark" (click)="agregarProducto()">
+    <div class="mt-3 mb-2">
+      <button type="button" class="btn btn-dark" (click)="agregarProducto()">
         <i class="bi bi-plus-circle"></i>Agregar Producto
-    </button>
-  </div>
-
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="bi bi-cart-check"></i> Mi carrito
-                </h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div *ngIf="carroProductos.length==0">
-                    Carrito vacío.
-                </div>
-                <div *ngIf="carroProductos.length>0">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col" colspan="2">Producto</th>
-                                <th scope="col">Precio</th>
-                            </tr>
-                        </thead>
-                        <tbody *ngFor="let c of carroProductos">
-                            <tr>
-                                <th scope="row"><img src="{{c.imagen}}" height="50rem"></th>
-                                <td>{{c.nombre}}</td>
-                                <td>{{c.precio | currency: '$'}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <b *ngIf="carroProductos.length>0">Total: {{precioTotal | currency: '$'}}</b>
-                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-        </div>
+      </button>
     </div>
-</div>
 
-<legend class="text-center mt-2 mb-4">Productos Destacados</legend>
-    <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="row">
-                    <div class="col-sm-6 col-md-3" *ngFor="let p of productos.slice(0, 4)">
-                        <div class="card card-hover mb-2">
-                            <div class="card-header text-end"><b>{{p.precio | currency: '$'}}</b></div>
-                            <img src="{{p.imagen}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">{{p.nombre}}</h5>
-                                <p class="card-text">{{p.descripcion}}</p>
-                                <a (click)="agregarProductoCarro(p)" class="btn btn-dark"
-                                    onclick="alert('Se agregó al carrito.')"><i class="bi bi-cart-plus"></i> Agregar al
-                                    carrito</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              <i class="bi bi-cart-check"></i> Mi carrito
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div *ngIf="carroProductos.length == 0">Carrito vacío.</div>
+            <div *ngIf="carroProductos.length > 0">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col" colspan="2">Producto</th>
+                    <th scope="col">Precio</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let c of carroProductos">
+                  <tr>
+                    <th scope="row"></th>
+                    <td>{{ c.nombre }}</td>
+                    <td>{{ c.precio | currency : "$" }}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <div class="carousel-item">
-                <div class="row">
-                    <div class="col-sm-6 col-md-3" *ngFor="let p of productos.slice(4)">
-                        <div class="card card-hover mb-2">
-                            <div class="card-header text-end"><b>{{p.precio | currency: '$'}}</b></div>
-                            <img src="{{p.imagen}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">{{p.nombre}}</h5>
-                                <p class="card-text">{{p.descripcion}}</p>
-                                <a (click)="agregarProductoCarro(p)" class="btn btn-dark"
-                                    onclick="alert('Se agregó al carrito.')"><i class="bi bi-cart-plus"></i> Agregar al
-                                    carrito</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button class="botonesCarrusel carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span>Anterior</span>
-        </button>
-        <button class="botonesCarrusel carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span>Siguiente</span>
-        </button>
-
-</div>
- </div>
-
- 
-
-<!-- <div class="text-center">
-  <h3>LISTA DE PRODUCTOS</h3>
-</div>
-<div>
-  <div>
-    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        <i class="bi bi-cart"> Ver mi carrito</i>
-    </button>
-</div>
-
-<div class="mt-3 mb-2">
-    <button type="button" class="btn btn-dark" (click)="agregarProducto()">
-      <i class="bi bi-file-plus"></i>Agregar Producto
-    </button>
-</div>
-
-</div>
-
-<div class="card">
-  <div class="m-2">
-    <button type="button" class="btn btn-primary" (click)="agregarProducto()">AGREGAR PRODUCTO</button>
-  </div>
-  <div class="row">
-      <div class="col-lg-3 col-md-4 col-sm-12 mx-auto p-2" *ngFor="let p of productos" >
-        <div class="card" style="width: 400px;">
-          <img 
-            src="https://w7.pngwing.com/pngs/482/190/png-transparent-tennis-ball-small-ball-s-rectangle-sport-logo-thumbnail.png" 
-            class="card-img-top m-2" alt="..." style="height: 180px; width: 362px;">
-            <div class="card-body">
-            <h5 class="card-title">{{p.nombre}} <br></h5>
-            <p class="card-text">
-              {{p.descripcion}}<br>
-              ${{p.precio}}  <br>
-            </p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+          <div class="modal-footer">
+            <b *ngIf="carroProductos.length > 0"
+              >Total: {{ precioTotal | currency : "$" }}</b
+            >
+            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
+              Cerrar
+            </button>
           </div>
         </div>
       </div>
-  </div>
-</div>
+    </div>
 
- -->
+    <legend class="text-center mt-2 mb-4">Productos Destacados</legend>
+
+
+      <!-- <div
+        id="carouselExampleControls"
+        class="carousel carousel-dark slide container"
+        data-bs-ride="carousel"
+      >
+       <div class="carousel-inner">
+          <div class="carousel-item active">
+              <div class="row">
+                  <div class="col-sm-6 col-md-3" *ngFor="let p of productos.slice(0,4)">
+                      <div class="card card-hover mb-2">
+                          <div class="card-header text-end"><b>{{p.precio | currency: '$'}}</b></div>
+                          <img src="{{p.imagen}}" class="card-img-top" alt="...">
+                          <div class="card-body">
+                              <h5 class="card-title">{{p.nombre}}</h5>
+                              <p class="card-text">{{p.descripcion}}</p>
+                              <a (click)="agregarProductoCarro(p)" class="btn btn-dark"
+                                  onclick="alert('Se agregó al carrito.')"><i class="bi bi-cart-plus"></i> Agregar al
+                                  carrito</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="carousel-item">
+              <div class="row">
+                  <div class="col-sm-6 col-md-3" *ngFor="let p of productos.slice(3)">
+                      <div class="card card-hover mb-2">
+                          <div class="card-header text-end"><b>{{p.precio | currency: '$'}}</b></div>
+                          <img src="{{p.imagen}}" class="card-img-top" alt="...">
+                          <div class="card-body">
+                              <h5 class="card-title">{{p.nombre}}</h5>
+                              <p class="card-text">{{p.descripcion}}</p>
+                              <a (click)="agregarProductoCarro(p)" class="btn btn-dark"
+                                  onclick="alert('Se agregó al carrito.')"><i class="bi bi-cart-plus"></i> Agregar al
+                                  carrito</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+          <button
+          class="botonesCarrusel carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleControls"
+          data-bs-slide="prev"
+    >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span>Anterior</span>
+        </button>
+        <button
+          class="botonesCarrusel carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleControls"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span>Siguiente</span>
+        </button>
+
+    </div> -->
+
+    <div class="row">
+      <div class="col-12">
+          <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                  <div class="carousel-item active">
+                      <img src="https://img.freepik.com/vector-premium/conjunto-elementos-electrodomesticos-color-sombra-aislada-productos-electricos-electronicos-digitales-ilustracion-vectorial-plana_98292-2097.jpg?w=2000" class="d-block w-25 mx-auto img-fluid" >
+                    </div>
+                <div class="carousel-item"*ngFor="let p of productos">
+                  <div class="card card-hover">
+                    <div class="card-header text-end"><b>{{p.precio | currency: '$'}}</b></div>
+                    <img src="{{p.imagen}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{p.nombre}}</h5>
+                        <p class="card-text">{{p.descripcion}}</p>
+                        <a (click)="agregarProductoCarro(p)" class="btn btn-dark"
+                            onclick="alert('Se agregó al carrito.')"><i class="bi bi-cart-plus"></i> Agregar al
+                            carrito</a>
+                    </div>
+                </div>
+                  <!-- <img src={{p.imagen}} class="d-block w-25 mx-auto img-fluid " >
+                  <h5 class="edi">Nombre del Producto : {{p.nombre}}</h5>
+                  <p class="edi"> Descripcion: {{p.descripcion}}</p>
+                  <p class="edi"> Precio: {{p.precio}}</p> -->
+                </div>
+
+              </div>
+              <button class="carousel-control-prev carousel-btn" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+              </button>
+              <button class="carousel-control-next carousel-btn" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+              </button>
+            </div>
+      </div>
+  </div>
+
+</div>
+</div>

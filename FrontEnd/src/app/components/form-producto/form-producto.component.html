@@ -1,31 +1,62 @@
-<div class="card">
+<div class="container">
+  <div class="card">
     <div class="card-header">
       GESTION DE PRODUCTOS
     </div>
     <div class="card-body">
-        <form>
+        <form #productoForm="ngForm">
             <div class="mb-3">
                 <label for="idnombre" class="form-label">Nombre</label>
                 <input name="nombre" type="text" class="form-control" id="idnombre"
                  [(ngModel)]="producto.nombre"
+                 #nombre="ngModel" required
                 >
+                <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert alert-danger">
+                  <div *ngIf="nombre.errors?.['required']">
+                      Este campo es obligatorio.
+                  </div>
+              </div>
               </div>
               <div class="mb-3">
                 <label for="idfuncion" class="form-label">Descripcion</label>
                 <textarea name="funcion" class="form-control" id="idDescripcion" rows="3"
                 [(ngModel)]="producto.descripcion"
+                #txt="ngModel" minlength="20" required
                     ></textarea>
+                    <div *ngIf="txt.invalid && (txt.dirty || txt.touched)" class="alert alert-danger">
+                      <div *ngIf="txt.errors?.['required']">
+                          Este campo es obligatorio.
+                      </div>
+                      <div *ngIf="txt.errors?.['minlength']">
+                          Mínimo 20 caracteres.
+                      </div>
+                  </div>
               </div>
               <div class="mb-3">
                 <label for="idemail" class="form-label">URL IMAGEN</label>
                 <input name="text" type="text" class="form-control" id="idemail"
-                [(ngModel)]="producto.imagen"   >
+                [(ngModel)]="producto.imagen"
+                #urlImagen="ngModel" required >
+                <div *ngIf="urlImagen.invalid && (urlImagen.dirty || urlImagen.touched)" class="alert alert-danger">
+                  <div *ngIf="urlImagen.errors?.['required']">
+                      Este campo es obligatorio.
+                  </div>
+              </div>
               </div>
 
               <div class="mb-3">
                 <label for="idPrecio" class="form-label">Precio</label>
                 <input name="number" type="number" class="form-control" id="idPrecio"
-                [(ngModel)]="producto.precio"   >
+                [(ngModel)]="producto.precio"
+                #precio="ngModel" required min="0">
+                <div *ngIf="precio.invalid && (precio.dirty || precio.touched)" class="alert alert-danger">
+                  <div *ngIf="precio.errors?.['required']">
+                      Este campo es obligatorio.
+                  </div>
+                  <div *ngIf="precio.errors?.['min']">
+                      Ingrese un numero positivo.
+                  </div>
+              </div>
               </div>
 
 
@@ -37,8 +68,10 @@
                 </select>
               </div>
 
-              <button type="button" class="btn btn-primary"(click)="guardarProducto()">Guardar</button>
+              <button type="button" class="btn btn-primary"(click)="guardarProducto()" [disabled]="!productoForm.form.valid">Guardar</button>
+              <button type="button" class="btn btn-secondary mx-1"(click)="volver()">volver</button>
         </form>
     </div>
 </div>
 
+</div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Espectador } from 'src/app/models/espectador';
 import { Ticket } from 'src/app/models/ticket';
 import { EspectadorService } from 'src/app/services/espectador.service';
@@ -15,7 +15,8 @@ export class TicketFormComponent implements OnInit {
 
   constructor(private ticketService: TicketService,
     private espectatorService:EspectadorService,
-    private activatedRouter: ActivatedRoute) {
+    private activatedRouter: ActivatedRoute,
+    private router: Router) {
       this.ticket=new Ticket();
       this.cargarEspectadores();
       this.espectadores = new Array<Espectador>();
@@ -33,6 +34,7 @@ export class TicketFormComponent implements OnInit {
 
         } else {
           this.accion = "update";
+          this.cargarTicket(params['id']);
 
         }
       }
@@ -48,7 +50,6 @@ export class TicketFormComponent implements OnInit {
           Object.assign(espectador, element);
           this.espectadores.push(espectador);
           espectador=new Espectador();
-
       })
     })
   }
@@ -59,14 +60,39 @@ export class TicketFormComponent implements OnInit {
       {
         alert(res.msg);
         this.ticket= new Ticket();
-        this.band1=false;
+        this.router.navigate(["ticket"]);
       }
        },error=>{
            alert(error.msg);
       }
-      
+
     )
   }
 
+  cargarTicket(id:string){
+    this.ticket=new Ticket();
+    this.ticketService.getTicket(id).subscribe(res =>{
+        Object.assign(this.ticket, res);
+        console.log(this.ticket);
+      },error=>{
+          console.log("Error al traer la informacion")
+      }
+    )
+  }
 
+  modificarTicket(ticket:Ticket) {
+      this.ticketService.modificarTicket(ticket).subscribe(
+        result => {
+          console.log(result);
+          this.router.navigate(["ticket"]);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+  }
+
+  irAlista(){
+    this.router.navigate(["ticket"]);
+  }
 }

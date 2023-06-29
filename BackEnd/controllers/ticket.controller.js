@@ -2,8 +2,12 @@ const Ticket= require("../models/ticket");
 const ticketCtrl={};
 
 ticketCtrl.createTicket= async (req, res) => {
-    var ticket = new Ticket(req.body);
+    var { precioTicket, categoriaEspectador } = req.body;
     try {
+      if (categoriaEspectador == "l" || categoriaEspectador == "l" ){
+          precioTicket = precioTicket - ( precioTicket * 20 / 100 );
+        }
+      var ticket = new Ticket({ ...req.body, precioTicket });
       await ticket.save();
       res.json({
         status: "1",
@@ -17,7 +21,6 @@ ticketCtrl.createTicket= async (req, res) => {
     }
   };
   
-
   ticketCtrl.getTickets= async (req, res) => {
     let criteria={};
    
@@ -27,6 +30,12 @@ ticketCtrl.createTicket= async (req, res) => {
     var tickets = await Ticket.find(criteria).populate("espectador");
     res.json(tickets);
   };
+
+  ticketCtrl.getTicket= async (req, res) => {
+    const ticket = await Ticket.findById(req.params.id);
+    res.json(ticket);
+  };
+
 
   ticketCtrl.deleteTicket = async (req, res) => {
     try {
