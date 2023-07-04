@@ -17,8 +17,8 @@ export class TicketFormComponent implements OnInit {
     private espectatorService:EspectadorService,
     private activatedRouter: ActivatedRoute,
     private router: Router) {
-      this.ticket=new Ticket();
-      this.cargarEspectadores();
+      
+      this.espectador=new Espectador();
       this.espectadores = new Array<Espectador>();
 
   }
@@ -26,14 +26,19 @@ export class TicketFormComponent implements OnInit {
   ticket!:Ticket;
   accion!: string;
   band1: boolean = false;
+  espectador!: Espectador;
   espectadores!:Array<Espectador>;
   ngOnInit(): void {
     this.activatedRouter.params.subscribe(params => {
         if (params['id'] == "0") {
           this.accion = "new";
+          this.ticket=new Ticket();
+          this.cargarEspectadores();
+         
 
         } else {
           this.accion = "update";
+          this.ticket=new Ticket();
           this.cargarTicket(params['id']);
 
         }
@@ -42,7 +47,7 @@ export class TicketFormComponent implements OnInit {
   }
 
 
-  cargarEspectadores(){
+  async cargarEspectadores(){
     this.espectatorService.getEspectadores().subscribe(data=>{
       console.log(data);
       let espectador= new Espectador();
@@ -69,11 +74,13 @@ export class TicketFormComponent implements OnInit {
     )
   }
 
-  cargarTicket(id:string){
+ async cargarTicket(id:string){
+    await this.cargarEspectadores();
     this.ticket=new Ticket();
     this.ticketService.getTicket(id).subscribe(res =>{
         Object.assign(this.ticket, res);
-        console.log(this.ticket);
+        console.log(this.espectadores);
+        this.ticket.espectador = this.espectadores.find(espect=> (espect._id==this.ticket.espectador._id))!;
       },error=>{
           console.log("Error al traer la informacion")
       }

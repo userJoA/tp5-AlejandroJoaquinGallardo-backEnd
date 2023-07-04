@@ -6,4 +6,9 @@ export class Ticket {
     categoriaEspectador!:string;
     fechaCompra!:string;
     espectador!:Espectador;
+
+
+    constructor(){
+    this.espectador = new Espectador();
+    }
 }

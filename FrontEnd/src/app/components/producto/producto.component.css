@@ -22,3 +22,8 @@
  color: white;
  transition: 4ms;
 }
+
+img{
+  height: auto;
+  width: auto;
+}
