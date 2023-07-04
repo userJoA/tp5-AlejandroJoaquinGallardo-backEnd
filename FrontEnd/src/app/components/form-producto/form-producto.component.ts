@@ -32,12 +32,13 @@ export class FormProductoComponent implements  OnInit {
     this.productoService.crearProducto(this.producto).subscribe(result=>{
         if(result.status==1){
           alert(result.msg);
+          this.volver();
         }
       },error=>{
         alert(error.msg);
       }
     )
-    this.producto= new Producto();
+    
   }
 
   volver(){

@@ -1,77 +1,81 @@
-<div class="container-fluid">
+<div class="container" style="height: 100vh;">
 
-<div class="row">
-  <h3 class="col-12 text-center text-primary text-decoration-underline">LISTADO DE TRANSACCIONES</h3>
+<div>
+  <h3 class="col-12 text-center text-primary text text-primary">LISTADO DE TRANSACCIONES</h3>
 </div>
 <div class="row mb-2">
   <div class="col-12">
-      <button class="btn-primary" (click)="agregarTransaccion()">AGREGAR</button>
+      <button class="btn btn-dark" (click)="agregarTransaccion()"><i class="bi bi-plus-lg mx-1"></i>AGREGAR</button>
   </div>
 </div>
+<div class="row m-1">
 
-<div class="card">
-  <div >
-      <div>
-        <button class="btn btn-lg w-60 text-start" (click)="cargarTransacciones()">Listar Todas las transacciones</button>
-      </div>
-      <div>
-        <button class="btn btn-lg w-60 text-start" (click)="cambiar()">Listar transacciones por email</button>
-        <form class="row g-3 m-3 bg-ligth" *ngIf="aux" >
-          <div class="col-auto" >
-            <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese email" [(ngModel)]="email">
+  <div class="col-lg-4 col-md-4 col-12">
+      <div class="mt-4">
+          <div>
+            <button class="btn w-100 bg-dark text-start text-white mb-2 mt-2 p-3" (click)="cargarTransacciones()">Listar Todas las transacciones</button>
           </div>
-          <div class="col-auto">
-            <button type="submit" class="btn btn-primary mb-3" (click)="cargarTransacionesPorEmail()">Filtrar</button>
+          <div>
+            <button class="btn w-100 bg-dark text-start text-white mb-2 mt-2 p-3" (click)="cambiar()">Listar transacciones por email</button>
+            <form class="row g-3 m-3 bg-dark p-2" *ngIf="aux" >
+              <div class="col-auto" >
+                <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese email" [(ngModel)]="email">
+              </div>
+              <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-3" (click)="cargarTransacionesPorEmail()">Filtrar</button>
+              </div>
+            </form>
           </div>
-        </form>
-      </div>
-      <div>
-        <button class="btn btn-lg w-60 text-start" (click)="cambiar2()">Listar Transacciones por Moneda de origen y Destino</button>
-        <form class="row g-3 m-3 bg-ligth" *ngIf="aux2" >
-          <div class="col-auto" >
-            <input type="text" class="form-control" id="monedaOrigen" placeholder="Moneda De Origen" name="monedaOrigen" [(ngModel)]="monedaOrigen">
+          <div>
+            <button class="btn w-100 bg-dark text-start text-white mb-2 mt-2 p-3" (click)="cambiar2()">Listar Transacciones por Moneda de origen y Destino</button>
+            <form class="row g-3 m-3 bg-dark p-2" *ngIf="aux2" >
+              <div class="col-auto" >
+                <input type="text" class="form-control" id="monedaOrigen" placeholder="Moneda De Origen" name="monedaOrigen" [(ngModel)]="monedaOrigen">
+              </div>
+              <div class="col-auto" >
+                <input type="text" class="form-control" id="monedaDestino" placeholder="Moneda Destino" name="monedaDestino" [(ngModel)]="monedaDestino">
+              </div>
+              <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-3" (click)="cargarTransacionesMonOD()">Filtrar</button>
+              </div>
+            </form>
+            
           </div>
-          <div class="col-auto" >
-            <input type="text" class="form-control" id="monedaDestino" placeholder="Moneda Destino" name="monedaDestino" [(ngModel)]="monedaDestino">
-          </div>
-          <div class="col-auto">
-            <button type="submit" class="btn btn-primary mb-3" (click)="cargarTransacionesMonOD()">Filtrar</button>
-          </div>
-        </form>
-        
       </div>
   </div>
+  <div class="col-lg-8 col-md-8 col-12">
+    <div class="card" *ngIf="bandTransacciones">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col" style="width: 15%;">Moneda Origen</th>
+            <th scope="col" style="width: 15%;">Cantidad Origen</th>
+            <th scope="col" style="width: 15%;">Moneda Destino</th>
+            <th scope="col" style="width: 15%;">Cantidad Destino</th>
+            <th scope="col" style="width: 20%;">email Cliente</th>
+            <th scope="col" style="width: 10%;">Tasa de Conversion</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let t of transacciones">
+          <tr >
+            <td>{{t.monedaOrigen}}</td>
+            <td>{{t.cantidadOrigen}}</td>
+            <td>{{t.monedaDestino}}</td>
+            <td>{{t.cantidadDestino  | number:'2.1-3'}}</td>
+            <td>{{t.emailCliente}}</td>
+            <td>{{t.tasaConversion}}</td>
+            <td>
+
+              <button class="btn btn-danger" (click)="eliminarTransaccion(t._id)">BORRAR</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
 </div>
 
-
-<div class="card" *ngIf="bandTransacciones">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col" style="width: 15%;">Moneda Origen</th>
-          <th scope="col" style="width: 15%;">Cantidad Origen</th>
-          <th scope="col" style="width: 15%;">Moneda Destino</th>
-          <th scope="col" style="width: 15%;">Cantidad Destino</th>
-          <th scope="col" style="width: 20%;">email Cliente</th>
-          <th scope="col" style="width: 10%;">Tasa de Conversion</th>
-        </tr>
-      </thead>
-      <tbody *ngFor="let t of transacciones">
-        <tr >
-          <td>{{t.monedaOrigen}}</td>
-          <td>{{t.cantidadOrigen}}</td>
-          <td>{{t.monedaDestino}}</td>
-          <td>{{t.cantidadDestino  | number:'2.1-3'}}</td>
-          <td>{{t.emailCliente}}</td>
-          <td>{{t.tasaConversion}}</td>
-          <td>
-            <button class="btn btn-success" >MOD</button>
-            <button class="btn btn-danger" (click)="eliminarTransaccion(t._id)">BORRAR</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
 </div>
 
 

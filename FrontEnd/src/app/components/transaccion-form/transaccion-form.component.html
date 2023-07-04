@@ -1,161 +1,214 @@
-<div class="card">
-  <form class="w-75 mb-5 mt-5 mx-auto" id="page-b-form" #formConvert="ngForm">
-    <legend
-      class="text-center bg-white text-danger w-100 p-4 border border-danger"
-    >
-      Conversor de Divisas
-    </legend>
-    <div class="mb-3 p-2">
-      <label for="textInput" class="form-label">Cantidad</label>
-      <input
-        type="number"
-        class="form-control"
-        id="textInput"
-        aria-describedby="number"
-        name="cantidad"
-        placeholder="$"
-        [(ngModel)]="transaccion.cantidadOrigen"
-        #cantidad="ngModel"
-        required
-        min="1"
-      />
-      <div
-        *ngIf="cantidad.invalid && (cantidad.dirty || cantidad.touched)"
-        class="alert alert-danger"
-      >
-        <div *ngIf="cantidad.errors?.['required']">Ingrese un valor.</div>
-        <div *ngIf="cantidad.errors?.['min']">La cantidad minima es 1.</div>
-      </div>
-    </div>
-    <div class="mb-3 p-2">
-      <label for="exampleInput" class="form-label">De</label>
-      <select
-        class="form-select form-select-lg"
-        name="moneda"
-        aria-label=".form-select-lg example"
-        [(ngModel)]="transaccion.monedaOrigen"
-        name="fromType"
-        #from="ngModel"
-      >
-        <option selected>Seleccione Moneda</option>
-        <option value="ARS">ARS</option>
-        <option value="USD">USD</option>
-        <option value="EUR">EUR</option>
-        <option value="GBP">GBP</option>
-      </select>
-      <div
-        *ngIf="from.invalid && (from.dirty || from.touched)"
-        class="alert alert-danger"
-      >
-        <div *ngIf="from.errors?.['required']">Seleccione una moneda.</div>
-      </div>
-    </div>
-    <div class="mb-3 p-2">
-      <label for="exampleInput" class="form-label">A</label>
-      <select
-        class="form-select form-select-lg"
-        name="monedaAconvertir"
-        aria-label=".form-select-lg example"
-        [(ngModel)]="transaccion.monedaDestino"
-        name="toType"
-        #to="ngModel"
-        required
-      >
-        <option selected>Seleccione Moneda</option>
-        <option value="ARS">ARS</option>
-        <option value="USD">USD</option>
-        <option value="EUR">EUR</option>
-        <option value="GBP">GBP</option>
-      </select>
-    </div>
-    <div
-      *ngIf="to.invalid && (from.dirty || to.touched)"
-      class="alert alert-danger"
-    >
-      <div *ngIf="to.errors?.['required']">Seleccione una moneda.</div>
-    </div>
-    <div class="mb-3 p-2">
-      <label for="textInput" class="form-label">Tasa de Conversion </label>
-      <input
-        type="number"
-        class="form-control"
-        id="textInput"
-        aria-describedby="number"
-        name="tasaconversion"
-        placeholder="$"
-        [(ngModel)]="transaccion.tasaConversion"
-        #tasa="ngModel"
-        required
-        min="1"
-      />
-      <div
-        *ngIf="tasa.invalid && (tasa.dirty || tasa.touched)"
-        class="alert alert-danger"
-      >
-        <div *ngIf="cantidad.errors?.['required']">Ingrese un valor.</div>
-        <div *ngIf="cantidad.errors?.['min']">La cantidad minima es 1.</div>
-      </div>
-    </div>
+<div class="container" style="height: 100vh;">
+  <div class="row">
+    <div class="col-lg-8 col-md-8 col-12 mt-5">
+            <div class="text-center mb-3">
+                <h5>Cotizacion</h5>
+            </div>
+            <div class="contenedor-tabla">
+                <table class="table table-bordered table-white">
 
-    <div class="mb-3 p-2">
-      <label for="textInput" class="form-label">Email</label>
-      <input
-        type="email"
-        class="form-control"
-        id="textInput"
-        aria-describedby="number"
-        name="email"
-        [(ngModel)]="transaccion.emailCliente"
-        #email="ngModel"
-        required
-        placeholder="example@example.com"
-      />
-      <div
-        *ngIf="email.invalid && (email.dirty || email.touched)"
-        class="alert alert-danger"
-      >
-        <div *ngIf="email.errors?.['required']">Este campo es obligatorio.</div>
+                    <thead>
+                        <tr>
+                            <th scope="col"> </th>
+                            <th scope="col"><br>USD</th>
+                            <th scope="col"><br>EUR</th>
+                            <th scope="col"><br>GBP</th>
+                            <th scope="col"><br>JPY</th>
+                            <th scope="col"><br>CNY</th>
+                            <th scope="col"><br>AUD</th>
+                            <th scope="col"><br>BTC</th>
+                            <th scope="col"><br>ARS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let div of divisas">
+                            <th>
+                                {{div.nom}} <br> {{div.nom1}} </th>
+                            <td>{{div.USD}}<br>{{div.USD1}}</td>
+                            <td>{{div.EUR}}<br>{{div.EUR2}}</td>
+                            <td>{{div.GBP}}<br>{{div.GBP3}}</td>
+                            <td>{{div.JPY}}<br>{{div.JPY4}}</td>
+                            <td>{{div.CNY}}<br>{{div.CNY5}}</td>
+                            <td>{{div.AUD}}<br>{{div.AUD6}}</td>
+                            <td>{{div.BTC}}<br>{{div.BTC7}}</td>
+                            <td>{{div.ARS}}<br>{{div.ARS8}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <div class="col-4">
+      <div class="card mt-4">
+        <form class="w-75 mb-5 mt-5 mx-auto" id="page-b-form" #formConvert="ngForm">
+          <legend
+            class="text-center bg-white text-danger w-100 p-4 border border-danger"
+          >
+            Conversor de Divisas
+          </legend>
+          <div class="mb-3 p-2">
+            <label for="textInput" class="form-label">Cantidad</label>
+            <input
+              type="number"
+              class="form-control"
+              id="textInput"
+              aria-describedby="number"
+              name="cantidad"
+              placeholder="$"
+              [(ngModel)]="transaccion.cantidadOrigen"
+              #cantidad="ngModel"
+              required
+              min="1"
+            />
+            <div
+              *ngIf="cantidad.invalid && (cantidad.dirty || cantidad.touched)"
+              class="alert alert-danger"
+            >
+              <div *ngIf="cantidad.errors?.['required']">Ingrese un valor.</div>
+              <div *ngIf="cantidad.errors?.['min']">La cantidad minima es 1.</div>
+            </div>
+          </div>
+          <div class="mb-3 p-2">
+            <label for="exampleInput" class="form-label">De</label>
+            <select
+              class="form-select form-select-lg"
+              name="moneda"
+              aria-label=".form-select-lg example"
+              [(ngModel)]="transaccion.monedaOrigen"
+              name="fromType"
+              #from="ngModel"
+            >
+              <option value="" selected>Seleccione Moneda</option>
+              <option value="USD">USD Dolares EEUU</option>
+              <option value="EUR">EUR Euro</option>
+              <option value="GBP">GBP Libra Esterlina</option>
+              <option value="RUB">RUB Rublo ruso</option>
+              <option value="JPY">JPY Yen</option>
+              <option value="CNY">CNY Yuan Renminbi</option>
+              <option value="AUD">AUD Dólar australiano</option>
+              <option value="BTC">BTC Bitcoin</option>
+              <option value="ARS">ARS Peso argentino</option>
+            </select>
+            <div
+              *ngIf="from.invalid && (from.dirty || from.touched)"
+              class="alert alert-danger"
+            >
+              <div *ngIf="from.errors?.['required']">Seleccione una moneda.</div>
+            </div>
+          </div>
+          <div class="mb-3 p-2">
+            <label for="exampleInput" class="form-label">A</label>
+            <select
+              class="form-select form-select-lg"
+              name="monedaAconvertir"
+              aria-label=".form-select-lg example"
+              [(ngModel)]="transaccion.monedaDestino"
+              name="toType"
+              #to="ngModel"
+              required
+            >
+              <option value="" selected>Seleccione Moneda</option>
+              <option value="USD">USD Dolares EEUU</option>
+              <option value="EUR">EUR Euro</option>
+              <option value="GBP">GBP Libra Esterlina</option>
+              <option value="RUB">RUB Rublo ruso</option>
+              <option value="JPY">JPY Yen</option>
+              <option value="CNY">CNY Yuan Renminbi</option>
+              <option value="AUD">AUD Dólar australiano</option>
+              <option value="BTC">BTC Bitcoin</option>
+              <option value="ARS">ARS Peso argentino</option>
+            </select>
+          </div>
+          <div
+            *ngIf="to.invalid && (to.dirty || to.touched)"
+            class="alert alert-danger"
+          >
+            <div *ngIf="to.errors?.['required']">Seleccione una moneda.</div>
+          </div>
+          <div class="mb-3 p-2">
+            <label for="textInput" class="form-label">Tasa de Conversion </label>
+            <input
+              type="number"
+              class="form-control"
+              id="textInput"
+              aria-describedby="number"
+              name="tasaconversion"
+              placeholder="$"
+              [(ngModel)]="transaccion.tasaConversion"
+              #tasa="ngModel"
+              required
+              min="1"
+            />
+            <div
+              *ngIf="tasa.invalid && (tasa.dirty || tasa.touched)"
+              class="alert alert-danger"
+            >
+              <div *ngIf="cantidad.errors?.['required']">Ingrese un valor.</div>
+              <div *ngIf="cantidad.errors?.['min']">La cantidad minima es 1.</div>
+            </div>
+          </div>
+      
+          <div class="mb-3 p-2">
+            <label for="textInput" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="textInput"
+              aria-describedby="number"
+              name="email"
+              [(ngModel)]="transaccion.emailCliente"
+              #email="ngModel"
+              required
+              placeholder="example@example.com"
+            />
+            <div
+              *ngIf="email.invalid && (email.dirty || email.touched)"
+              class="alert alert-danger"
+            >
+              <div *ngIf="email.errors?.['required']">Este campo es obligatorio.</div>
+            </div>
+          </div>
+      
+          <div [hidden]="!band1" class="mb-3 p-2">
+            <label for="textInput" class="form-label">Monto convertido</label>
+            <input
+              type="number"
+              class="form-control"
+              id="textInput"
+              aria-describedby="number"
+              name="montoConvertido"
+              placeholder="$"
+              [(ngModel)]="transaccion.cantidadDestino"
+            />
+          </div>
+      
+          <div
+            [hidden]="band1"
+            class="mb-3 p-2 text-white"
+            style="margin: 10px 0 10px 0; text-align: center"
+          >
+            <button
+              class="btn btn-warning p-2"
+              style="width: 100%"
+              (click)="Convertir()"
+            >
+              Convertir
+            </button>
+          </div>
+          <div
+            [hidden]="!band1"
+            class="mb-3 p-2 text-white"
+            style="margin: 10px 0 10px 0; text-align: center"
+          >
+            <button
+              class="btn btn-susscess"
+              (click)="guardarTransaccion()"
+            >
+              Guardar Transaccion
+            </button>
+          </div>
+        </form>
       </div>
+      
     </div>
-
-    <div [hidden]="!band1" class="mb-3 p-2">
-      <label for="textInput" class="form-label">Monto convertido</label>
-      <input
-        type="number"
-        class="form-control"
-        id="textInput"
-        aria-describedby="number"
-        name="montoConvertido"
-        placeholder="$"
-        [(ngModel)]="transaccion.cantidadDestino"
-      />
-    </div>
-
-    <div
-      [hidden]="band1"
-      class="mb-3 p-2 text-white"
-      style="margin: 10px 0 10px 0; text-align: center"
-    >
-      <button
-        class="btn btn-warning p-2"
-        style="width: 100%"
-        (click)="Convertir()"
-      >
-        Convertir
-      </button>
-    </div>
-    <div
-      [hidden]="!band1"
-      class="mb-3 p-2 text-white"
-      style="margin: 10px 0 10px 0; text-align: center"
-    >
-      <button
-        type="submit"
-        class="btn btn-susscess"
-        (click)="guardarTransaccion()"
-      >
-        Guardar Transaccion
-      </button>
-    </div>
-  </form>
+  </div>
 </div>

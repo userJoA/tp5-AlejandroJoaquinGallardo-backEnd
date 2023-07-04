@@ -7,5 +7,8 @@ export class Transaccion {
     emailCliente!:string;
     tasaConversion!:number;
 
-    constructor() {};
+    constructor() {
+        this.monedaDestino="";
+        this.monedaOrigen=""
+    };
 }
